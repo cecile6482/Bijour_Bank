@@ -1,10 +1,16 @@
 // <block:setup:1>
-const datapoints = [1200, 750, 775, 760, 2560];
-const DATA_COUNT = datapoints.length + 2;
-const labels = [];
+let datapoints = [1200, 750, 775, 760, 2560];
+let lsDatapoints = JSON.parse(localStorage.getItem("tabMontant"));
+
+if (localStorage.getItem("next") !== null){
+  datapoints = lsDatapoints}
+
+let DATA_COUNT = datapoints.length + 2;
+let labels = [];
 for (let i = 0; i < DATA_COUNT; ++i) {
   labels.push(i.toString());
 }
+
 const data = {
   labels: labels,
   datasets: [
@@ -72,3 +78,14 @@ function addTemperature(time, temperature) {
   /* Rafraichir le graphique */
   chart.update();
 }
+
+//màj du graph
+function updateGraph (){
+  datapoints.push(parseFloat(localStorage.getItem("next")));
+  chart.update();
+  localStorage.setItem("tabMontant", JSON.stringify(datapoints));
+
+   DATA_COUNT = datapoints.length + 2;
+   labels.push(DATA_COUNT.toString);
+}
+
