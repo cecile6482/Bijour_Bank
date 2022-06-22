@@ -167,6 +167,43 @@ updateGraph();
 
 })
 
+//génération des opérations stockées dans le local storage
+let affichageBas = document.querySelector("#Affichage_bas");
+let tableauOpe = JSON.parse(localStorage.getItem("operations"));
+
+ if (localStorage.getItem("valeurSuivante") !== null){
+     for (let index = 0; index < tableauOpe.length; index++) {
+  let operator =  tableauOpe[index].type;
+  let image = tableauOpe[index].image;
+  let titre = tableauOpe[index].titre;
+  let desc = tableauOpe[index].desc;
+  let montant = tableauOpe[index].montant;
+  let pourcentage2 = tableauOpe[index].pourcentage
+
+  affichageBas.innerHTML +=`<div class="operation ${operator}">
+  <div class="grid-x grid-padding-x align-middle">
+    <div class="cell shrink">
+      <div class="picto">
+        ${image}
+      </div>
+    </div>
+    <div class="cell auto">
+      <div>
+        <h2>${titre}</h2>
+        <small>${desc}</small>
+      </div>
+    </div>
+    <div class="cell small-3 text-right">
+      <div>
+        <p class="count">${montant}€</p>
+        <small>${pourcentage2}%</small>
+      </div>
+    </div>
+  </div>
+  </div>`;
+       
+     }
+ }
 
 //fonction qui change le message en dessous du solde
  function messenger (){
