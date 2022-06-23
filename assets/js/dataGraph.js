@@ -1,11 +1,7 @@
 // <block:setup:1>
 let datapoints = [1200, 750, 775, 760, 2560];
-let lsDatapoints = JSON.parse(localStorage.getItem("tabMontant"));
-
-if (localStorage.getItem("nextLine") !== null){
-  datapoints = lsDatapoints}
-
 let DATA_COUNT = datapoints.length + 2;
+
 let labels = [];
 for (let i = 0; i < DATA_COUNT; ++i) {
   labels.push(i.toString());
@@ -64,7 +60,7 @@ chart = new Chart(context, config);
 
 /* Générer des données aléatoires */
 function generateData() {
-  randomTemperature = (Math.random() * Math.floor(50)).toFixed(2); // Deux chiffres après la virgule
+  randomTemperature = solde; // Deux chiffres après la virgule
   addTemperature(new Date().toLocaleTimeString(), randomTemperature);
 }
 
@@ -77,15 +73,5 @@ function addTemperature(time, temperature) {
 
   /* Rafraichir le graphique */
   chart.update();
-}
-
-//màj du graph
-function updateGraph (){
-  datapoints.push(parseFloat(localStorage.getItem("nextLine")));
-  chart.update();
-  localStorage.setItem("tabMontant", JSON.stringify(datapoints));
-
-   DATA_COUNT = datapoints.length + 2;
-   labels.push(DATA_COUNT.toString);
 }
 

@@ -23,6 +23,10 @@ if (lsVal !== null){
   console.log(solde);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  generateData();
+})
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //fonctionnement des onglets
 const onglet_credit = document.querySelector("#onglet_credit");
@@ -137,10 +141,12 @@ form.reset();
 if (operator == "credit"){
 solde = parseFloat(solde) + parseFloat(montant);
 document.querySelector("#solde").innerHTML= solde+"€"
+generateData();
 }
 else {
   solde = parseFloat(solde) - parseFloat(montant);
 document.querySelector("#solde").innerHTML= solde+"€"
+generateData();
 }
 
 //appel de la fonction qui change le message en dessous du solde
@@ -163,7 +169,7 @@ localStorage.setItem("operations", JSON.stringify(operations));
 localStorage.setItem("nextLine", parseFloat(solde));
 
 //màj graph
-updateGraph();
+// updateGraph();
 
 })
 
@@ -208,9 +214,9 @@ let tableauOpe = JSON.parse(localStorage.getItem("operations"));
 //fonction qui change le message en dessous du solde
  function messenger (){
   let message = document.querySelector("#msg");
-  let solde = document.addEventListener("#solde").innerHTML;
+  let solde = document.querySelector("#solde").innerHTML;
 
- if (solde >= 0 ){
+ if (parseFloat(solde) >= 0 ){
   message.innerHTML = "On est bien 😀"
   message.style.color="green"
 }
