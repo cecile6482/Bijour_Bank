@@ -2,7 +2,7 @@
 let datapoints = [1200, 750, 775, 760, 2560];
 let lsDatapoints = JSON.parse(localStorage.getItem("tabMontant"));
 
-if (localStorage.getItem("next") !== null){
+if (localStorage.getItem("nextLine") !== null){
   datapoints = lsDatapoints}
 
 let DATA_COUNT = datapoints.length + 2;
@@ -81,7 +81,7 @@ function addTemperature(time, temperature) {
 
 //màj du graph
 function updateGraph (){
-  datapoints.push(parseFloat(localStorage.getItem("next")));
+  datapoints.push(parseFloat(localStorage.getItem("nextLine")));
   chart.update();
   localStorage.setItem("tabMontant", JSON.stringify(datapoints));
 

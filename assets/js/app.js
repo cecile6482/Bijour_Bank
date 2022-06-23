@@ -7,7 +7,7 @@ $(document).ready(function () {
 });
 
 //local storage vide ou non
-let lsVal = localStorage.getItem("next");
+let lsVal = localStorage.getItem("nextLine");
 
 //definition du tableau en fonction du status du local Storage
 let operations=[]; 
@@ -94,10 +94,10 @@ const montant = document.querySelector("#montant").value;
 
 let operator = document.querySelector("#operator").value;
 
-let image = '<img src="./assets/images/sac-dargent.png" alt="credit" />'
+let image = '<img src="./assets/images/sac-dargent.png" alt="credit">'
 
 if (operator == "debit") { 
-  image = '<img src="./assets/images/depenses.png" alt="debit" />'
+  image = '<img src="./assets/images/depenses.png" alt="debit">'
 }
 
 //calcul du pourcentage 
@@ -160,7 +160,7 @@ const operation = {
 operations.push(operation);
 
 localStorage.setItem("operations", JSON.stringify(operations));
-localStorage.setItem("next", parseFloat(solde));
+localStorage.setItem("nextLine", parseFloat(solde));
 
 //màj graph
 updateGraph();
@@ -168,10 +168,10 @@ updateGraph();
 })
 
 //génération des opérations stockées dans le local storage
-let affichageBas = document.querySelector("#Affichage_bas");
+let afficher = document.querySelector("#afficher");
 let tableauOpe = JSON.parse(localStorage.getItem("operations"));
 
- if (localStorage.getItem("valeurSuivante") !== null){
+ if (localStorage.getItem("nextLine") !== null){
      for (let index = 0; index < tableauOpe.length; index++) {
   let operator =  tableauOpe[index].type;
   let image = tableauOpe[index].image;
@@ -180,7 +180,7 @@ let tableauOpe = JSON.parse(localStorage.getItem("operations"));
   let montant = tableauOpe[index].montant;
   let pourcentage2 = tableauOpe[index].pourcentage
 
-  affichageBas.innerHTML +=`<div class="operation ${operator}">
+  afficher.innerHTML +=`<div class="operation ${operator}">
   <div class="grid-x grid-padding-x align-middle">
     <div class="cell shrink">
       <div class="picto">
@@ -208,7 +208,7 @@ let tableauOpe = JSON.parse(localStorage.getItem("operations"));
 //fonction qui change le message en dessous du solde
  function messenger (){
   let message = document.querySelector("#msg");
-  let solde = document.addEventListener("#solde");
+  let solde = document.addEventListener("#solde").innerHTML;
 
  if (solde >= 0 ){
   message.innerHTML = "On est bien 😀"
